@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .TopSection {
+
+        display: flex;
+        justify-content: space-between;
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        /* padding: 10px; */
+    }
+
+    .TopSection .link {
+        margin-top: 10px;
+        padding: 10px;
+        font-size: x-large;
+
+    }
+</style>
+
+<body>
+    <div class="TopSection">
+        <h2>Welcome {{request.session.user_fname}}</h2>
+     
+        <div class="link">
+            <a href="/logout">Logout</a>
+        </div>
+    </div>
+
+    <form action="/update/{{ pie.id }}" method="post" class="form-example">
+        {% csrf_token %}
+        <div class="form-example">
+            <label for="name">Name: </label>
+            <input type="text"
+            value="{{pie.name}}"
+            name="name" id="name" required>
+        </div>
+        <div class="form-example">
+            <label for="email">Filling: </label>
+            <input type="text" 
+            value="{{pie.filling}}"
+            name="filling" id="filling" required>
+        </div>
+        <div class="form-example">
+            <label for="crust">Crust: </label>
+            <input 
+            value="{{pie.crust}}"
+            type="text" name="crust" id="crust" required>
+        </div>
+        <div class="form-example">
+            <input type="submit" value="Add Pie">
+        </div>
+    </form>
+</body>
+
+</html>

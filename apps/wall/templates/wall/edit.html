@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Edit Account Info</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'wall/edit.css' %}">
+    </head>
+    <body>
+        <form action='/users/update' method='post'>
+            {% csrf_token %}
+            <h3>Edit Info - {{ thisUser.first_name }} {{ thisUser.last_name }}</h3>
+            <p>First Name</p>
+            <input type="text" name="fname" value="{{ thisUser.first_name }}">
+            <p>Last Name</p>
+            <input type="text" name="lname" value="{{ thisUser.last_name }}">
+            <p>Update Password</p>
+            <input type="password" name="pword">
+            <p>Confirm Update Password</p>
+            <input type="password" name="conf_pw"><br>
+            <input type="submit" value="Update"><br>
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </form>
+        <a href="/wall">Go Back</a>
+    </body>
+</html>

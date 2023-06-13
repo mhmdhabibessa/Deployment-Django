@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        form.form-example {
+            display: table;
+            width: 100%;
+            padding: 20px;
+            
+        }
+
+        div.form-example {
+            display: table-row;
+        }
+
+        label,
+        input {
+            display: table-cell;
+            margin-bottom: 10px;
+        }
+
+        label {
+            padding-right: 10px;
+        }
+
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 50%;
+        }
+
+        td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+
+        .TopSection {
+
+            display: flex;
+            justify-content: space-between;
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            /* padding: 10px; */
+        }
+
+        .TopSection .link {
+            margin-top: 10px;
+            padding: 10px;
+            font-size: x-large;
+
+        }
+
+        .mainSection {
+            display: flex;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="TopSection">
+        <h2>Welcome {{request.session.user_fname}}</h2>
+        <div class="link">
+            <a href="/pie-derby">Pie Derby</a>
+        </div>
+        <div class="link">
+            <a href="/logout">Logout</a>
+        </div>
+    </div>
+    <hr>
+
+    <div>
+
+    </div>
+    <div class="mainSection">
+
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Actions</th>
+            </tr>
+            {% for pie in pies %}
+            <tr>
+                <td>{{ pie.name }}</td>
+                <td>
+                    {% if pie.user.id == request.session.user_id %}
+                    <a href="/delete/{{pie.id}}">Delete</a> 
+                    <a href="/edit/{{pie.id}}">Edit</a> 
+                    {%endif %}
+                    <div>
+                        <a href="/pie-derby">View</a>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <div>
+            <form action="/craete-pie" method="post" class="form-example">
+                {% csrf_token %}
+                <div class="form-example">
+                    <label for="name">Name: </label>
+                    <input type="text" name="name" id="name" required>
+                </div>
+                <div class="form-example">
+                    <label for="email">Filling: </label>
+                    <input type="text" name="filling" id="filling" required>
+                </div>
+                <div class="form-example">
+                    <label for="email">Crust: </label>
+                    <input type="text" name="crust" id="crust" required>
+                </div>
+                <div class="form-example">
+                    <input type="submit" value="Add Pie">
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+</body>
+
+</html>

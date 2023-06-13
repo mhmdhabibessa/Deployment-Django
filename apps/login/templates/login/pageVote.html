@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+ .mainSection{
+    border: 4px gray solid;
+    padding: 20px;
+    margin: auto;
+    width: 40%;
+    display: block;
+    margin-top: 100px;
+    text-align: center;
+ }
+ 
+ .buttonvot{
+    font-size: x-large;
+    margin: auto;
+    width: 200px;
+    padding: 20px;
+    
+ }
+ .buttonvot a {
+    margin-top: 20px;
+    height: 50px;
+
+    margin-left: 20px;
+ }
+ .TopSection {
+
+display: flex;
+justify-content: space-between;
+font-family: arial, sans-serif;
+border-collapse: collapse;
+/* padding: 10px; */
+}
+
+.TopSection .link {
+margin-top: 10px;
+padding: 10px;
+font-size: x-large;
+
+}
+</style>
+<body>
+
+    <div class="TopSection">
+        <h2>Welcome {{request.session.user_fname}}</h2>
+        <div class="link">
+            <a href="/pie-derby">Pie Derby</a>
+        </div>
+        <div class="link">
+            <a href="/logout">Logout</a>
+        </div>
+    </div>
+    
+
+    <div class="mainSection">
+        <h1>{{pie.name}} by {{pie.user.first_name}} {{pie.user.last_name}} </h1>
+        <h3>{{pie.filling}}</h3>
+        <h3>{{pie.crust}}</h3>
+
+        <div>
+            <div class="buttonvot">
+                <span>Cast a Vote:</span><br><br>
+                {% if user not in  pie.vote.all %}
+                <a href="/user/vote/{{pie.id}}">Vote</a>
+                {% else %}
+                <a href="/user/un-vote/{{pie.id}}">Un Vote</a>
+                {% endif  %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+  margin: 0 auto;
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 60%;
+  margin-top: 40px;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+.TopSection {
+
+display: flex;
+justify-content: space-between;
+font-family: arial, sans-serif;
+border-collapse: collapse;
+/* padding: 10px; */
+}
+
+.TopSection .link {
+margin-top: 10px;
+padding: 10px;
+font-size: x-large;
+
+}
+.TopSection {
+
+display: flex;
+justify-content: space-between;
+font-family: arial, sans-serif;
+border-collapse: collapse;
+/* padding: 10px; */
+}
+
+.TopSection .link {
+margin-top: 10px;
+padding: 10px;
+font-size: x-large;
+
+}
+</style>
+</head>
+<body>
+
+    <div class="TopSection">
+        <h2>Welcome {{request.session.user_fname}}</h2>
+        <div class="link">
+            <a href="/pie-derby">Pie Derby</a>
+        </div>
+        <div class="link">
+            <a href="/logout">Logout</a>
+        </div>
+    </div>
+
+<h2>HTML Table</h2>
+
+
+<table>
+  <tr>
+    <th>Name</th>
+      <th>  PyPi By</th>
+    <th>Vote</th>
+  </tr>
+  {% for pie in pies %}
+  <tr>
+    <td> <a href="/vote-pie/{{pie.id}}"> {{pie.name}} </a></td>
+    <td>{{pie.user.first_name}} {{pie.user.last_name}}</td>
+    <td>{{pie.vote.count}}</td>
+  </tr>
+  {% endfor %}
+
+</table>
+
+</body>
+</html>
+
+
+</body>
+</html>
